@@ -1,0 +1,14 @@
+type Query {
+    users: [User!]! @paginate(defaultCount: 10)
+    user(id: ID @eq): User @find
+}
+
+type Relationship {
+    id: ID!
+    name: String!
+    email: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    userFirst: User @belongsTo
+    userSecond: User @belongsTo
+}

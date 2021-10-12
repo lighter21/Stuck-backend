@@ -1,0 +1,16 @@
+type Query {
+}
+
+type Notification {
+    id: ID!
+    notifiable_id: Int
+    notifiable_type: String
+    user_id: Int
+    created_at: DateTime!
+    updated_at: DateTime!
+    user: User @belongsTo
+    notifiable: Notifiable! @morphMany
+}
+
+#Typy dla których można będzie wysłać notyfikację: zaproszenie do znajomych, grupy, wydarzenie,
+union Notifiable = Invitation

@@ -7,16 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Invitation extends Model
 {
     protected $fillable = [
-        'inviteable_type',
-        'user_to',
-        'user_from',
+        'invitable_type',
+        'user_to_id',
+        'user_from_id',
         'type'
     ];
-
-    public function invitable()
-    {
-        return $this->morphTo();
-    }
 
     public function userTo()
     {
@@ -31,5 +26,10 @@ class Invitation extends Model
     public function notifications()
     {
         return $this->morphMany('App\Models\Notification', 'notifiable');
+    }
+
+    public function invitable()
+    {
+        return $this->morphTo();
     }
 }

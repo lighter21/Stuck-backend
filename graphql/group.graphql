@@ -1,9 +1,7 @@
 type Query {
-    users: [User!]! @paginate(defaultCount: 10)
-    user(id: ID @eq): User @find
 }
 
-type User {
+type Group {
     id: ID!
     name: String!
     email: String!

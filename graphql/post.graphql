@@ -1,0 +1,16 @@
+type Query {
+    users: [User!]! @paginate(defaultCount: 10)
+    user(id: ID @eq): User @find
+}
+
+type Post {
+    id: ID!
+    user_id: Int
+    body: String
+    created_at: DateTime!
+    updated_at: DateTime!
+    user: User! @belongsTo
+    reactions: [Reaction!] @hasMany
+}
+
+

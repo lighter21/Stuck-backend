@@ -1,0 +1,17 @@
+type Query {
+}
+
+type Invitation {
+    id: ID!
+    type: String
+    user_from: Int!
+    user_to: Int!
+    invitable_id: Int
+    invitable_type: String
+    created_at: DateTime!
+    updated_at: DateTime!
+    user_to: User! @belongsTo
+    user_from: User! @belongsTo
+    invitable: Invitable @morphMany
+}
+union Invitable = User | Group
