@@ -1,5 +1,6 @@
 type Query {
-    users: [User!]! @paginate(defaultCount: 10)
+    users: [User!]! @all
+    #    users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
 }
 
@@ -9,9 +10,9 @@ type User {
     email: String!
     created_at: DateTime!
     updated_at: DateTime!
-    notifications:[Notification] @hasMany
-    invitations: [Invitation] @hasMany
-    posts: [Post] @hasMany
-    relationships: [Relationship] @hasMany
-    notifications: [Notification] @hasMany
+    notifications: [Notification]! @hasMany
+    invitations: [Invitation]! @hasMany
+    posts: [Post]! @hasMany
+    relationships: [Relationship]! @hasMany
 }
+

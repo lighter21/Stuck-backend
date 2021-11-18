@@ -1,6 +1,3 @@
-type Query {
-}
-
 type Invitation {
     id: ID!
     type: String
@@ -14,4 +11,5 @@ type Invitation {
     user_from: User! @belongsTo
     invitable: Invitable @morphMany
 }
+
 union Invitable = User | Group

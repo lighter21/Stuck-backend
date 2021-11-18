@@ -15,6 +15,7 @@ type Query
 type Mutation
 
 #import user.graphql
+#import group.graphql
 #import invitation.graphql
 #import notification.graphql
 #import post.graphql

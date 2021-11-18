@@ -1,15 +1,11 @@
-type Query {
+extend type Query {
+    groups: [Group]! @all
 }
 
 type Group {
     id: ID!
     name: String!
-    email: String!
+    privacy: String!
     created_at: DateTime!
     updated_at: DateTime!
-    notifications:[Notification] @hasMany
-    invitations: [Invitation] @hasMany
-    posts: [Post] @hasMany
-    relationships: [Relationship] @hasMany
-    notifications: [Notification] @hasMany
 }
