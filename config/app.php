@@ -27,6 +27,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'api_url' => env('API_URL', 'api.stuck.loc'),
 
     /*
     |--------------------------------------------------------------------------
