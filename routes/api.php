@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,13 +19,18 @@ Route::get('test', function () {
     return "WORKS";
 })->name('test');
 
-Route::get('sanctum/csrf-cookie', '\Laravel\Sanctum\Http\Controllers\CsrfCookieController@show')->name('csrf-cookie');
+
+Route::prefix('auth')->group(function () {
+    Route::get('sanctum/csrf-cookie', '\Laravel\Sanctum\Http\Controllers\CsrfCookieController@show')->name('csrf-cookie');
+    Route::post('register', [RegisterController::class, 'register']);
+    Route::post('login', [LoginController::class, 'login'])->name('login');
+    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+    Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
+});
 
 Route::middleware('auth:sanctum')->prefix('auth')->group(function () {
-    Route::post('user', [AuthController::class, 'me'])->name('me');
-//    Route::post('login', [AuthController::class, 'login'])->name('login');
-//    Route::post('logout', [AuthController::class, 'logout']);
-//    Route::post('register', [AuthController::class, 'register'])->name('register');
-    Auth::routes();
+    Route::get('user', [LoginController::class, 'me']);
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
+
 

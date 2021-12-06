@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -41,6 +43,21 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'User created succesfully',
+            'data' => $user
+        ], 200);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,7 +67,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'second_name' => ['string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'birth_date' => ['required', 'before:13 years'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -65,7 +85,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'second_name' =>$data['second_name'],
+            'last_name' => $data['last_name'],
+            'birth_date' => $data['birth_date'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
