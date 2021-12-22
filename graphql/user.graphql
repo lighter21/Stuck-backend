@@ -10,9 +10,9 @@ type User {
     email: String!
     created_at: DateTime!
     updated_at: DateTime!
-    notifications: [Notification]! @hasMany
-    invitations: [Invitation]! @hasMany
-    posts: [Post]! @hasMany
-    relationships: [Relationship]! @hasMany
+#    notifications: [Notification]! @hasMany
+#    invitations: [Invitation]! @hasMany
+#    posts: [Post]! @hasMany
+#    relationships: [Relationship]! @hasMany
 }
 
