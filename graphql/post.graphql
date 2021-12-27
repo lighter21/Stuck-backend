@@ -1,3 +1,11 @@
+extend type Query {
+    timeline(user_id: Int): [Post!]
+}
+
+extend type Mutation {
+    createPost(input: CreatePostInput! @spread): Post @create
+}
+
 type Post {
     id: ID!
     user_id: Int
@@ -6,6 +14,11 @@ type Post {
     updated_at: DateTime!
     user: User! @belongsTo
     reactions: [Reaction!] @hasMany
+    comments: [Comment!] @hasMany
+}
+input CreatePostInput {
+    user_id: Int
+    body: String!
 }
 
 

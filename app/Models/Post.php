@@ -11,6 +11,7 @@ class Post extends Model
     use SoftDeletes;
 
     protected $fillable = ['user_id', 'body'];
+    protected $with = ['user', 'reactions', 'comments'];
 
     public function user()
     {
@@ -20,5 +21,10 @@ class Post extends Model
     public function reactions()
     {
         return $this->hasMany(Reaction::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

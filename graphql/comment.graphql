@@ -1,0 +1,11 @@
+type Comment {
+    id: ID!
+    user_id: Int
+    post_id: Int
+    body: String
+    created_at: DateTime
+    updated_at: DateTime
+    user: User @belongsTo
+    post: Post @belongsTo
+}
+
