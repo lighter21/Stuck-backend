@@ -1,6 +1,5 @@
 extend type Query {
-    users: [User!]! @all
-    user(id: ID @eq): User @find
+    user(username: String @eq): User @find
 }
 
 type User {
@@ -8,7 +7,9 @@ type User {
     first_name: String!
     second_name: String!
     last_name: String!
+    username: String!
     email: String!
+    birth_date: Date
     created_at: DateTime!
     updated_at: DateTime!
     notifications: [Notification]! @hasMany

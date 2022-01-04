@@ -1,3 +1,7 @@
+extend type Mutation {
+    createComment(input: CreateCommentInput! @spread): Comment @create
+}
+
 type Comment {
     id: ID!
     user_id: Int
@@ -9,3 +13,8 @@ type Comment {
     post: Post @belongsTo
 }
 
+input CreateCommentInput {
+    user_id: Int
+    post_id: Int
+    body: String
+}
