@@ -5,7 +5,7 @@ extend type Query {
 type User {
     id: ID!
     first_name: String!
-    second_name: String!
+    second_name: String
     last_name: String!
     username: String!
     email: String!

@@ -53,7 +53,7 @@ class RegisterController extends Controller
 
         return response()->json([
             'status' => 'Success',
-            'message' => 'User created succesfully',
+            'message' => 'Account created succesfully',
             'data' => $user
         ], 200);
     }
@@ -68,7 +68,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
-            'second_name' => ['string', 'max:255'],
+            'second_name' => ['max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'birth_date' => ['required', 'before:13 years'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
