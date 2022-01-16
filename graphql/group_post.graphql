@@ -1,0 +1,9 @@
+extend type Mutation {
+    AttachPostToGroup(post_id: Int!, group_id: Int!): GroupPost
+}
+
+type GroupPost {
+    id: ID!
+    post_id: Int
+    group_id: Int
+}
