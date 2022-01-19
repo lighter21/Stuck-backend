@@ -1,5 +1,6 @@
 extend type Query {
     user(username: String @eq): User @find
+    users: [User!]! @all
 }
 
 type User {
