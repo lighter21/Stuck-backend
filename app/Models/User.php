@@ -51,9 +51,14 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
-    public function invitations()
+    public function recievedInvitations()
     {
-        return $this->hasMany(Invitation::class);
+        return $this->hasMany(Invitation::class, 'user_to_id');
+    }
+
+    public function sendInvitations()
+    {
+        return $this->hasMany(Invitation::class, 'user_from_id');
     }
 
     public function posts()
@@ -63,7 +68,7 @@ class User extends Authenticatable
 
     public function relationships()
     {
-        return $this->hasMany(Relationship::class);
+        return $this->hasMany(Relationship::class, ['user_first_id', 'user_second_id']);
     }
 
     public function comments()

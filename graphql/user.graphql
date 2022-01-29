@@ -14,7 +14,8 @@ type User {
     created_at: DateTime!
     updated_at: DateTime!
     notifications: [Notification]! @hasMany
-    invitations: [Invitation]! @hasMany
+    recievedInvitations: [Invitation]! @hasMany
+    sendInvitations: [Invitation]! @hasMany
     posts: [Post]! @hasMany
     relationships: [Relationship]! @hasMany
 }

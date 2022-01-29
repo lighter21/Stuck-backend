@@ -11,6 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class RelationshipType extends Enum
 {
-    const FRIEND =   "FRIEND";
+    const FRIEND =    "FRIEND";
+    const COUPLE =    "COUPLE";
     const IGNORED =   "IGNORED";
 }

@@ -19,8 +19,6 @@ class CreateInvitationsTable extends Migration
             $table->enum('type', InvitationType::getValues());
             $table->foreignId('user_from_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_to_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('invitable_id')->nullable();
-            $table->string('invitable_type')->nullable();
             $table->timestamps();
         });
     }

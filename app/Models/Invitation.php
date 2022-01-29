@@ -13,23 +13,25 @@ class Invitation extends Model
         'type'
     ];
 
+    protected $with = ['userTo', 'userFrom'];
+
     public function userTo()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_to_id');
     }
 
     public function userFrom()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_from_id');
     }
 
-    public function notifications()
-    {
-        return $this->morphMany('App\Models\Notification', 'notifiable');
-    }
-
-    public function invitable()
-    {
-        return $this->morphTo();
-    }
+//    public function notifications()
+//    {
+//        return $this->morphMany('App\Models\Notification', 'notifiable');
+//    }
+//
+//    public function invitable()
+//    {
+//        return $this->morphTo();
+//    }
 }

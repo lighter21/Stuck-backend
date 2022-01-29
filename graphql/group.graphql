@@ -3,6 +3,10 @@ extend type Query {
     group(id: ID! @eq): Group @find
 }
 
+extend type Mutation {
+    createGroup(input: CreateGroupInput @spread): Group @create
+}
+
 type Group {
     id: ID!
     name: String!
@@ -11,4 +15,10 @@ type Group {
     created_at: DateTime!
     updated_at: DateTime!
     posts: [Post] @belongsToMany(relation: "Posts")
+}
+
+input CreateGroupInput {
+    name: String!
+    privacy: String!
+    description: String!
 }

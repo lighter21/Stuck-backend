@@ -1,9 +1,24 @@
+extend type Mutation {
+    createRelationship(input: CreateRelationshipInput! @spread): Relationship @create
+}
+
+
 type Relationship {
     id: ID!
-    name: String!
-    email: String!
+    user_first_id: ID!
+    user_second_id: ID!
+    type: String!
+    status: String!
     created_at: DateTime!
     updated_at: DateTime!
+
     userFirst: User @belongsTo
     userSecond: User @belongsTo
+}
+
+input CreateRelationshipInput {
+    user_first_id: ID!
+    user_second_id: ID!
+    type: String!
+    status: String!
 }
