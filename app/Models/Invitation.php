@@ -7,22 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Invitation extends Model
 {
     protected $fillable = [
-        'invitable_type',
-        'user_to_id',
-        'user_from_id',
+        'sender_id',
+        'receiver_id',
         'type'
     ];
 
-    protected $with = ['userTo', 'userFrom'];
+    protected $with = ['sender', 'receiver'];
 
-    public function userTo()
+    public function sender()
     {
-        return $this->belongsTo(User::class, 'user_to_id');
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
-    public function userFrom()
+    public function receiver()
     {
-        return $this->belongsTo(User::class, 'user_from_id');
+        return $this->belongsTo(User::class, 'receiver_id');
     }
 
 //    public function notifications()

@@ -1,15 +1,11 @@
 type Invitation {
     id: ID!
     type: String
-    user_from: Int!
-    user_to: Int!
-    invitable_id: Int
-    invitable_type: String
+    sender_id: Int!
+    receiver_id: Int!
     created_at: DateTime!
     updated_at: DateTime!
-    user_to: User! @belongsTo
-    user_from: User! @belongsTo
-    invitable: Invitable @morphMany
+    sender: User! @belongsTo
+    receiver: User! @belongsTo
 }
 
-union Invitable = User | Group

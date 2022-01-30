@@ -17,8 +17,8 @@ class CreateInvitationsTable extends Migration
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
             $table->enum('type', InvitationType::getValues());
-            $table->foreignId('user_from_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('user_to_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('sender_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('receiver_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
