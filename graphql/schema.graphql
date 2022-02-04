@@ -12,7 +12,6 @@ type Mutation
 #import group.graphql
 #import group_post.graphql
 #import invitation.graphql
-#import notification.graphql
 #import post.graphql
 #import comment.graphql
 #import reaction.graphql

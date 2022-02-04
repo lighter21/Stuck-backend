@@ -36,6 +36,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    protected $with = ['receivedInvitations'];
 
     /**
      * The attributes that should be cast.
@@ -46,12 +47,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function notifications()
-    {
-        return $this->hasMany(Notification::class);
-    }
-
-    public function recievedInvitations()
+    public function receivedInvitations()
     {
         return $this->hasMany(Invitation::class, 'receiver_id');
     }

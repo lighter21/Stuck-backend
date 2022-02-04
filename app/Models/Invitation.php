@@ -12,7 +12,7 @@ class Invitation extends Model
         'type'
     ];
 
-    protected $with = ['sender', 'receiver'];
+    protected $with = ['sender'];
 
     public function sender()
     {
