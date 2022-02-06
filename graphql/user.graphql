@@ -1,3 +1,9 @@
+extend type Mutation {
+    UpdateFriendRequest(id: ID!, friend_id: ID!, status: String!): User
+#    CreateFriendRequest(input: RespondToInvitationInput!): User
+
+}
+
 extend type Query {
     user(username: String @eq): User @find
     users: [User!]! @all
@@ -13,10 +19,14 @@ type User {
     birth_date: Date
     created_at: DateTime!
     updated_at: DateTime!
-    notifications: [Notification]! @hasMany
-    receivedInvitations: [Invitation]! @hasMany
-    sendInvitations: [Invitation]! @hasMany
     posts: [Post]! @hasMany
-    relationships: [Relationship]! @hasMany
+    friends: [User] @belongsToMany
+    invitations: [User] @belongsToMany
+    relationships: [User] @belongsToMany
+}
+
+input RespondToInvitationInput {
+    friend_id: ID!
+    status: String!
 }
 

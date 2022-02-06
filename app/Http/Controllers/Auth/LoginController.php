@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -66,7 +67,10 @@ class LoginController extends Controller
 
     public function me()
     {
-        return Auth::user();
+        $id = Auth::id();
+        $user = User::with('invitations')->whereId($id)->first();
+        if (!$user) return response()->json('Unauthenticated', 401);
+        return $user;
     }
 
     protected function guard()

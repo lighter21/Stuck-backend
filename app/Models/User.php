@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\StatusType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -36,7 +38,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    protected $with = ['receivedInvitations'];
 
     /**
      * The attributes that should be cast.
@@ -47,28 +48,39 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function receivedInvitations()
-    {
-        return $this->hasMany(Invitation::class, 'receiver_id');
-    }
-
-    public function sendInvitations()
-    {
-        return $this->hasMany(Invitation::class, 'sender_id');
-    }
-
     public function posts()
     {
         return $this->hasMany(Post::class)->orderBy("created_at", "DESC");
-    }
-
-    public function relationships()
-    {
-        return $this->hasMany(Relationship::class, 'user_first_id')->orWhere("relationships.user_second_id", $this->id);
     }
 
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function relationships()
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id')->using(Friend::class)->withPivot(['status', 'confirmed_at']);
+    }
+
+    public function friends()
+    {
+        return $this->relationships()->wherePivot('status', StatusType::ACCEPTED);
+    }
+
+    public function invitations()
+    {
+        return $this->relationships()->wherePivot('status', StatusType::PENDING);
+    }
+
+//    SCOPES
+
+    public function scopeSuggestedFriends(Builder $query, $user_id)
+    {
+        return $query->whereDoesntHave('relationships', function ($q) use ($user_id) {
+            return $q->where('friend_id', $user_id);
+        })->where('id', '!=', $user_id);
+
+    }
+
 }
