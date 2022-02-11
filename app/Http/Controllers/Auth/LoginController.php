@@ -68,7 +68,7 @@ class LoginController extends Controller
     public function me()
     {
         $id = Auth::id();
-        $user = User::with('invitations')->whereId($id)->first();
+        $user = User::with(['sendInvitations', 'receivedInvitations'])->whereId($id)->first();
         if (!$user) return response()->json('Unauthenticated', 401);
         return $user;
     }

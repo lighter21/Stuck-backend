@@ -13,7 +13,7 @@ type Post {
     created_at: DateTime!
     updated_at: DateTime!
     user: User! @belongsTo
-    reactions: [Reaction!] @hasMany
+    likes: [User!] @belongsToMany
     comments: [Comment!] @hasMany
 }
 input CreatePostInput {

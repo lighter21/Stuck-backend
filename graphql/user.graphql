@@ -1,12 +1,11 @@
 extend type Mutation {
-    UpdateFriendRequest(id: ID!, friend_id: ID!, status: String!): User
-#    CreateFriendRequest(input: RespondToInvitationInput!): User
-
+    UpdateOrCreateFriend(id: ID!, friend_id: ID!, status: String!): User
 }
 
 extend type Query {
     user(username: String @eq): User @find
     users: [User!]! @all
+    suggestedFriends(user_id: ID! @scope(name: "suggestedFriends")): [User!]! @all
 }
 
 type User {

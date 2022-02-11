@@ -13,4 +13,4 @@ type Mutation
 #import group_post.graphql
 #import post.graphql
 #import comment.graphql
-#import reaction.graphql
+#import like.graphql

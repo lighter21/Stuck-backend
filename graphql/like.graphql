@@ -1,0 +1,9 @@
+extend type Mutation {
+    ToggleLike(post_id: ID!, user_id: ID!): Post
+}
+
+type Like {
+    user_id: ID!
+    post_id: ID!
+}
+

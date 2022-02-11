@@ -10,6 +10,7 @@ class Group extends Model
 
     public function Posts()
     {
-        return $this->belongsToMany(Post::class, 'group_posts', 'post_id', 'group_id')->using(GroupPost::class);
+        return $this->belongsToMany(Post::class, 'group_posts', 'post_id', 'group_id')
+            ->using(GroupPost::class);
     }
 }

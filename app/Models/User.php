@@ -68,18 +68,23 @@ class User extends Authenticatable
         return $this->relationships()->wherePivot('status', StatusType::ACCEPTED);
     }
 
-    public function invitations()
+    public function receivedInvitations()
     {
-        return $this->relationships()->wherePivot('status', StatusType::PENDING);
+        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id')->using(Friend::class)->withPivot(['status', 'confirmed_at'])->where('status', StatusType::PENDING);
+    }
+
+    public function sendInvitations() {
+        return $this->relationships()->where('status', StatusType::PENDING);
     }
 
 //    SCOPES
 
     public function scopeSuggestedFriends(Builder $query, $user_id)
     {
-        return $query->whereDoesntHave('relationships', function ($q) use ($user_id) {
-            return $q->where('friend_id', $user_id);
-        })->where('id', '!=', $user_id);
+//        Userzy, których aktualny user nie ma w znajomych ani nie wysłał im zaproszenia
+        return $query->where('id', '!=', $user_id)->whereDoesntHave('relationships', function ($q) use ($user_id) {
+            return $q->where('user_id', '!=', $user_id)->orWhere('friend_id', '!=', $user_id);
+        });
 
     }
 
