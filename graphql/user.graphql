@@ -1,5 +1,6 @@
 extend type Mutation {
     UpdateOrCreateFriend(id: ID!, friend_id: ID!, status: String!): User
+    ChangeUserPassword(input: ChangePasswordInput!): User
     updateUserGeneralData(id: ID!, input: UpdateUserGeneralDataInput! @spread): User @update
 }
 
@@ -35,7 +36,12 @@ input UpdateUserGeneralDataInput {
     first_name: String!
     second_name: String
     last_name: String!
-#    password: String @hash
     email: String!
     birth_date: Date
+}
+
+input ChangePasswordInput {
+    old_password: String!
+    password: String! @rules(apply: ["required", "confirmed", "min:8"])
+    password_confirmation: String!
 }
