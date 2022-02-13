@@ -1,5 +1,6 @@
 extend type Mutation {
     UpdateOrCreateFriend(id: ID!, friend_id: ID!, status: String!): User
+    updateUserGeneralData(id: ID!, input: UpdateUserGeneralDataInput! @spread): User @update
 }
 
 extend type Query {
@@ -12,6 +13,7 @@ type User {
     id: ID!
     first_name: String!
     second_name: String
+    password: String!
     last_name: String!
     username: String!
     email: String!
@@ -29,3 +31,11 @@ input RespondToInvitationInput {
     status: String!
 }
 
+input UpdateUserGeneralDataInput {
+    first_name: String!
+    second_name: String
+    last_name: String!
+#    password: String @hash
+    email: String!
+    birth_date: Date
+}
