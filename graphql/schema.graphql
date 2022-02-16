@@ -4,6 +4,9 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
+scalar Upload
+@scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
+
 type Query
 
 type Mutation
@@ -14,3 +17,4 @@ type Mutation
 #import post.graphql
 #import comment.graphql
 #import like.graphql
+#import image.graphql

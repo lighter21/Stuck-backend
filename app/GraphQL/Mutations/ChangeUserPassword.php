@@ -4,7 +4,6 @@ namespace App\GraphQL\Mutations;
 use App\Models\User;
 use GraphQL\Type\Definition\ResolveInfo;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Contracts\Validation\Validator;
 use Nuwave\Lighthouse\Exceptions\ValidationException;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
@@ -27,6 +26,6 @@ class ChangeUserPassword
            $user->save();
            return $user;
        }
-       throw new \Exception('Old password is incorrect');
+       throw new \Exception('Incorrect data provided');
     }
 }
