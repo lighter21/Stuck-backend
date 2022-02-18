@@ -27,4 +27,9 @@ class Post extends Model
         return $this->belongsToMany(User::class, 'likes', 'user_id', 'post_id')
             ->using(Like::class);
     }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }

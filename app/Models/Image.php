@@ -11,6 +11,10 @@ class Image extends Model
     public $incrementing = false;
     protected $appends = ['parsed_path'];
 
+    public function imageable()
+    {
+        return $this->morphTo();
+}
 
     //    APPENDS
 
