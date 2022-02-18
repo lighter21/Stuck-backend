@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Enums\StatusType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -26,6 +26,7 @@ class User extends Authenticatable
         'last_name',
         'birth_date',
         'password',
+        'avatar',
         'remember_token'
     ];
 
@@ -73,7 +74,8 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id')->using(Friend::class)->withPivot(['status', 'confirmed_at'])->where('status', StatusType::PENDING);
     }
 
-    public function sendInvitations() {
+    public function sendInvitations()
+    {
         return $this->relationships()->where('status', StatusType::PENDING);
     }
 
@@ -86,6 +88,13 @@ class User extends Authenticatable
             return $q->where('user_id', '!=', $user_id)->orWhere('friend_id', '!=', $user_id);
         });
 
+    }
+
+//    APPENDS
+
+    public function getAvatarAttribute($value)
+    {
+        return asset('storage/images/' . $value);
     }
 
 }

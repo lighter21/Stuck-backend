@@ -9,9 +9,13 @@ class Image extends Model
     protected $fillable = ['imageable_id', 'imageable_type', 'path'];
     public $timestamps = false;
     public $incrementing = false;
+    protected $appends = ['parsed_path'];
 
-    public function getPathAttribute($value)
+
+    //    APPENDS
+
+    public function getParsedPathAttribute()
     {
-        return public_path($value);
+        return asset('storage/images/' . $this->path);
     }
 }

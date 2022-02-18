@@ -19,6 +19,7 @@ type User {
     username: String!
     email: String!
     birth_date: Date
+    avatar: String
     created_at: DateTime!
     updated_at: DateTime!
     posts: [Post]! @hasMany
@@ -38,6 +39,7 @@ input UpdateUserGeneralDataInput {
     last_name: String!
     email: String!
     birth_date: Date
+    avatar: String
 }
 
 input ChangePasswordInput {

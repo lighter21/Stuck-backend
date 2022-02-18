@@ -1,5 +1,5 @@
 extend type Mutation {
-    UploadImages(id: ID!, type: String!, files: [Upload!]): [Path!]
+    UploadImage(id: ID!, type: String!, file: Upload!): Image!
 
 }
 
@@ -7,8 +7,4 @@ type Image {
     imageable_id: ID!
     imageable_type: String!
     path: String!
-}
-
-type Path {
-    path: String
 }
