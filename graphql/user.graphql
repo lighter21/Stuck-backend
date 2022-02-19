@@ -24,8 +24,6 @@ type User {
     updated_at: DateTime!
     posts: [Post]! @hasMany
     friends: [User] @belongsToMany
-    invitations: [User] @belongsToMany
-    relationships: [User] @belongsToMany
 }
 
 input RespondToInvitationInput {

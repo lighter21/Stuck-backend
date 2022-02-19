@@ -2,6 +2,10 @@ extend type Mutation {
     UploadImage(id: ID!, type: String!, file: Upload!): Image!
 }
 
+extend type Query {
+    ImagesGallery(username: String): [Image!]
+}
+
 type Image {
     imageable_id: ID!
     imageable_type: String!

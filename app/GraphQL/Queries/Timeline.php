@@ -3,6 +3,7 @@
 namespace App\GraphQL\Queries;
 
 use App\Models\Post;
+use App\Models\User;
 
 class Timeline
 {
@@ -12,7 +13,10 @@ class Timeline
      */
     public function __invoke($_, array $args)
     {
-//       TODO: Dodać filtrowanie po znajomych
-        return Post::latest()->get();
+        $user = User::find($args['user_id']);
+        $postIds = $user->friends->pluck('id')->toArray();
+        array_push($postIds, $user->id);
+
+        return Post::whereIn('user_id', $postIds)->latest()->get();
     }
 }

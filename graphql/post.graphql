@@ -1,5 +1,5 @@
 extend type Query {
-    timeline(user_id: Int): [Post!]
+    Timeline(user_id: Int): [Post!]
 }
 
 extend type Mutation {
