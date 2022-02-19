@@ -79,9 +79,9 @@ class User extends Authenticatable
         return $this->relationships()->where('status', StatusType::PENDING);
     }
 
-    public function images()
+    public function image()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable');
     }
 
 //    SCOPES
