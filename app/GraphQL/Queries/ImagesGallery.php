@@ -13,7 +13,6 @@ class ImagesGallery
     public function __invoke($_, array $args)
     {
         $user = User::where('username', $args['username'])->firstOrFail();
-        $images =  $user->posts()->whereHas('image')->get()->pluck('image');
-        return $images;
+        return $user->posts()->whereHas('image')->get()->pluck('image');
     }
 }
