@@ -17,6 +17,6 @@ class Timeline
         $postIds = $user->friends->pluck('id')->toArray();
         array_push($postIds, $user->id);
 
-        return Post::whereIn('user_id', $postIds)->latest()->get();
+        return Post::whereIn('user_id', $postIds)->with(['comments', 'groups', 'likes', 'user', 'image'])->latest()->get();
     }
 }

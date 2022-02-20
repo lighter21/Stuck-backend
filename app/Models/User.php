@@ -49,6 +49,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['parsed_avatar_path'];
+
     public function posts()
     {
         return $this->hasMany(Post::class)->orderBy("created_at", "DESC");
@@ -102,9 +104,9 @@ class User extends Authenticatable
 
 //    APPENDS
 
-    public function getAvatarAttribute($value)
+    public function getParsedAvatarPathAttribute()
     {
-        return asset('storage/images/' . $value);
+        return asset('storage/images/' . $this->avatar);
     }
 
 }
