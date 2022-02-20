@@ -1,0 +1,8 @@
+extend type Mutation {
+    ToggleMembership(user_id: ID!, group_id: ID!): Group
+}
+
+type GroupMember {
+    user_id: ID!
+    group_id: ID!
+}

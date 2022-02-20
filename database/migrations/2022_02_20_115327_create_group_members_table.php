@@ -14,8 +14,10 @@ class CreateGroupMembersTable extends Migration
     public function up()
     {
         Schema::create('group_members', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->foreignId('group_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+
+            $table->unique(['user_id', 'group_id']);
         });
     }
 

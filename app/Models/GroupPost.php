@@ -8,4 +8,6 @@ class GroupPost extends Pivot
 {
     protected $fillable = ['post_id', 'group_id'];
     protected $table = "group_posts";
+    public $timestamps = false;
+    public $incrementing = false;
 }

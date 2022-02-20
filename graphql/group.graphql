@@ -14,7 +14,8 @@ type Group {
     description: String!
     created_at: DateTime!
     updated_at: DateTime!
-    posts: [Post] @belongsToMany(relation: "Posts")
+    posts: [Post!] @belongsToMany
+    members: [User!] @belongsToMany
 }
 
 input CreateGroupInput {

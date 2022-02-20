@@ -15,10 +15,16 @@ type Post {
     user: User! @belongsTo
     likes: [User!] @belongsToMany
     comments: [Comment!] @hasMany
+    groups: [Group] @belongsToMany
+    image: Image @morphOne
 }
 input CreatePostInput {
     user_id: Int
     body: String!
+    groups: UpdatePostGroupInput
 }
 
+input UpdatePostGroupInput {
+    sync: [ID]
+}
 

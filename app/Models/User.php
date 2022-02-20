@@ -79,6 +79,11 @@ class User extends Authenticatable
         return $this->relationships()->where('status', StatusType::PENDING);
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_members', 'user_id', 'group_id')->using(GroupMember::class);
+    }
+
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');

@@ -14,10 +14,10 @@ class CreateGroupPostsTable extends Migration
     public function up()
     {
         Schema::create('group_posts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')->constrained('posts')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('group_id')->constrained('groups')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
+            $table->foreignId('group_id')->constrained('groups')->onDelete('cascade');
+
+            $table->unique(['group_id', 'post_id']);
         });
     }
 
