@@ -49,7 +49,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['parsed_avatar_path'];
+    protected $appends = ['parsed_avatar_path', 'friends_count'];
 
     public function posts()
     {
@@ -107,6 +107,10 @@ class User extends Authenticatable
     public function getParsedAvatarPathAttribute()
     {
         return asset('storage/images/' . $this->avatar);
+    }
+    public function getFriendsCountAttribute()
+    {
+        return $this->friends()->count();
     }
 
 }

@@ -25,6 +25,7 @@ type User {
     updated_at: DateTime!
     posts: [Post]! @hasMany
     friends: [User] @belongsToMany
+    friends_count: Int!
 }
 
 input RespondToInvitationInput {
