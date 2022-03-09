@@ -21,6 +21,8 @@ type User {
     birth_date: Date
     avatar: String
     parsed_avatar_path: String
+    background: String
+    parsed_background_path: String
     created_at: DateTime!
     updated_at: DateTime!
     posts: [Post]! @hasMany
@@ -40,6 +42,7 @@ input UpdateUserGeneralDataInput {
     email: String!
     birth_date: Date
     avatar: String
+    background: String
 }
 
 input ChangePasswordInput {
