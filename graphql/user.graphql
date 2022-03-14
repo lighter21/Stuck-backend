@@ -28,6 +28,7 @@ type User {
     posts: [Post]! @hasMany
     friends: [User] @belongsToMany
     friends_count: Int!
+    images: [Image] @morphMany
 }
 
 input RespondToInvitationInput {

@@ -86,9 +86,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class, 'group_members', 'user_id', 'group_id')->using(GroupMember::class);
     }
 
-    public function image()
+    public function images()
     {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
 //    SCOPES
