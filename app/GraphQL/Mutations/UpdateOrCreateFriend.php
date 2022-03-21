@@ -3,6 +3,7 @@
 namespace App\GraphQL\Mutations;
 
 use App\Enums\StatusType;
+use App\Models\Friend;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -29,6 +30,8 @@ class UpdateOrCreateFriend
         } else if ($args['status'] === StatusType::ACCEPTED) {
             $this->updateOrCreateRelationship($user, $args['friend_id'], $args['status'], Carbon::now());
             $this->updateOrCreateRelationship($friend, $args['id'], $args['status'], Carbon::now());
+        } else if ($args['status'] === StatusType::CANCELED) {
+            Friend::where(['friend_id' => $args['friend_id'], 'user_id' => $user->id])->delete();
         } else {
             $this->updateOrCreateRelationship($user, $args['friend_id'], $args['status']);
         }

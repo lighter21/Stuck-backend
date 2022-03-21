@@ -14,8 +14,8 @@ class Group extends Model
 
     public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Post::class, 'group_posts', 'post_id', 'group_id')
-            ->using(GroupPost::class);
+        return $this->belongsToMany(Post::class, 'group_posts', 'group_id', 'post_id')
+            ->using(GroupPost::class)->orderByDesc('created_at');
     }
 
     public function members(): BelongsToMany
